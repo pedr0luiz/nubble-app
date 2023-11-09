@@ -1,10 +1,17 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import {Text} from './src/components/Text/Text';
 
 function App() {
   return (
     <SafeAreaView>
-      <Text>App.tsx</Text>
+      <Text preset="headingLarge" style={{color: 'red'}}>
+        Coffstack
+      </Text>
+      <Text preset="paragraphCaption" style={{color: 'red'}}>
+        Coffstack
+      </Text>
+      <Text preset="paragraphMedium">Coffstack</Text>
     </SafeAreaView>
   );
 }
