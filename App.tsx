@@ -8,7 +8,7 @@ function App() {
       <Text preset="headingLarge" style={{color: 'red'}}>
         Coffstack
       </Text>
-      <Text preset="paragraphCaption" style={{color: 'red'}}>
+      <Text preset="headingLarge" style={{fontFamily: 'Satoshi-Regular'}}>
         Coffstack
       </Text>
       <Text preset="paragraphMedium">Coffstack</Text>
