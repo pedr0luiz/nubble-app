@@ -4,6 +4,7 @@ import {Text} from './src/components/Text/Text';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
 import {Button} from './src/components/Button/Button';
+import {Icon} from './src/components/Icon/Icon';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Button title="Primary" marginBottom="s12" />
           <Button disabled title="Primary" marginBottom="s12" />
           <Button preset="outline" title="Outline" marginBottom="s12" />
-
+          <Icon name="eyeOn" />
           <Button preset="outline" title="Loading" loading />
         </View>
       </SafeAreaView>
