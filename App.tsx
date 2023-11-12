@@ -1,18 +1,27 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {Text} from './src/components/Text/Text';
+import {ThemeProvider} from '@shopify/restyle';
+import {theme} from './src/theme/theme';
+import {Button} from './src/components/Button/Button';
 
 function App() {
   return (
-    <SafeAreaView>
-      <Text preset="headingLarge" style={{color: 'red'}}>
-        Coffstack
-      </Text>
-      <Text preset="headingLarge" style={{fontFamily: 'Satoshi-Regular'}}>
-        Coffstack
-      </Text>
-      <Text preset="paragraphMedium">Coffstack</Text>
-    </SafeAreaView>
+    <ThemeProvider theme={theme}>
+      <SafeAreaView>
+        <View style={{paddingHorizontal: 24}}>
+          <Text preset="headingLarge" italic>
+            Coffstack
+          </Text>
+
+          <Button title="Primary" marginBottom="s12" />
+          <Button disabled title="Primary" marginBottom="s12" />
+          <Button preset="outline" title="Outline" marginBottom="s12" />
+
+          <Button preset="outline" title="Loading" loading />
+        </View>
+      </SafeAreaView>
+    </ThemeProvider>
   );
 }
 
