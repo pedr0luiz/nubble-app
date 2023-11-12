@@ -1,26 +1,17 @@
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
-import {Text} from './src/components/Text/Text';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
-import {Button} from './src/components/Button/Button';
-import {Icon} from './src/components/Icon/Icon';
-import {TextInput} from './src/components/TextInput/TextInput';
+import {LoginScreen} from './src/screens/auth/LoginScreen/LoginScreen';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {SignUpScreen} from './src/screens/auth/SignUpScreen/SignUpScreen';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <SafeAreaView>
-        <View style={{paddingHorizontal: 24}}>
-          <Text preset="headingLarge" italic>
-            Coffstack
-          </Text>
-          <TextInput label="batata" />
-          <Icon name="eyeOn" />
-          <Button preset="outline" title="Loading" loading />
-        </View>
-      </SafeAreaView>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        <SignUpScreen />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
