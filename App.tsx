@@ -5,6 +5,7 @@ import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
 import {Button} from './src/components/Button/Button';
 import {Icon} from './src/components/Icon/Icon';
+import {TextInput} from './src/components/TextInput/TextInput';
 
 function App() {
   return (
@@ -14,10 +15,7 @@ function App() {
           <Text preset="headingLarge" italic>
             Coffstack
           </Text>
-
-          <Button title="Primary" marginBottom="s12" />
-          <Button disabled title="Primary" marginBottom="s12" />
-          <Button preset="outline" title="Outline" marginBottom="s12" />
+          <TextInput label="batata" />
           <Icon name="eyeOn" />
           <Button preset="outline" title="Loading" loading />
         </View>
