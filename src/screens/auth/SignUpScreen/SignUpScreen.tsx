@@ -4,8 +4,28 @@ import {Text} from '../../../components/Text/Text';
 import {TextInput} from '../../../components/TextInput/TextInput';
 import {Button} from '../../../components/Button/Button';
 import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
+// import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../routes/Routes';
+import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
+
+// type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
+
+const resetParam: RootStackParamList['SuccessScreen'] = {
+  title: 'Sua conta foi criada com sucesso!',
+  description: 'Agora é só fazer login na nossa plataforma',
+  icon: {
+    name: 'checkRound',
+    color: 'success',
+  },
+};
 
 export function SignUpScreen() {
+  const {reset} = useResetNavigationSuccess();
+
+  const navigateToSuccess = () => {
+    reset(resetParam);
+  };
+
   return (
     <Screen canGoBack scrollable>
       <Text preset="headingLarge" mb="s32">
@@ -61,7 +81,7 @@ export function SignUpScreen() {
         //   usernameValidation.notReady ||
         //   emailValidation.notReady
         // }
-        // onPress={handleSubmit(submitForm)}
+        onPress={navigateToSuccess}
         title="Criar uma conta"
       />
     </Screen>
