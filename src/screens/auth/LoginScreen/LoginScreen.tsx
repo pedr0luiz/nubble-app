@@ -1,29 +1,32 @@
 import React from 'react';
-import {Screen} from '../../../components/Screen/Screen';
-import {Text} from '../../../components/Text/Text';
-import {Button} from '../../../components/Button/Button';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../routes/Routes';
-import {FormTextInput} from '../../../components/Form/FormTextInput';
 import {useForm} from 'react-hook-form';
-import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
-
-type LoginSchema = {
-  email: string;
-  password: string;
-};
+import {LoginSchema, loginSchema} from './loginSchema';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {RootStackParamList} from '@routes';
+import {
+  Button,
+  FormPasswordInput,
+  FormTextInput,
+  Screen,
+  Text,
+} from '@components';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
 
 export function LoginScreen({navigation}: ScreenProps) {
   const {control, formState, handleSubmit} = useForm<LoginSchema>({
-    // resolver: zodResolver(loginSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',
     },
     mode: 'onChange',
   });
+
+  function submitForm({email, password}: LoginSchema) {
+    console.log({email, password});
+  }
 
   function navigateToSignUpScreen() {
     navigation.navigate('SignUpScreen');
@@ -67,8 +70,8 @@ export function LoginScreen({navigation}: ScreenProps) {
 
       <Button
         // loading={isLoading}
-        // disabled={!formState.isValid}
-        // onPress={handleSubmit(submitForm)}
+        disabled={!formState.isValid}
+        onPress={handleSubmit(submitForm)}
         marginTop="s48"
         title="Entrar"
       />

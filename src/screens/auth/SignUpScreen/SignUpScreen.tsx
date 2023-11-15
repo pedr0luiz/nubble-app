@@ -1,15 +1,17 @@
 import React from 'react';
-import {Screen} from '../../../components/Screen/Screen';
-import {Text} from '../../../components/Text/Text';
-import {Button} from '../../../components/Button/Button';
 // import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../routes/Routes';
-import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
-import {FormTextInput} from '../../../components/Form/FormTextInput';
 import {useForm} from 'react-hook-form';
-import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
 import {SignUpSchema, signUpSchema} from './signUpSchema';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {RootStackParamList} from '@routes';
+import {useResetNavigationSuccess} from '@hooks';
+import {
+  Button,
+  FormPasswordInput,
+  FormTextInput,
+  Screen,
+  Text,
+} from '@components';
 
 // type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
@@ -31,18 +33,23 @@ const resetParam: RootStackParamList['SuccessScreen'] = {
 };
 
 export function SignUpScreen() {
-  const {control, formState, handleSubmit, watch, getFieldState} =
-    useForm<SignUpSchema>({
-      resolver: zodResolver(signUpSchema),
-      defaultValues,
-      mode: 'onChange',
-    });
+  const {control, formState, handleSubmit} = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues,
+    mode: 'onChange',
+  });
 
-  // const {reset} = useResetNavigationSuccess();
+  const {reset} = useResetNavigationSuccess();
 
   // const navigateToSuccess = () => {
   //   reset(resetParam);
   // };
+
+  function submitForm(formValues: SignUpSchema) {
+    // signUp(formValues);
+    console.log(formValues);
+    reset(resetParam);
+  }
 
   return (
     <Screen canGoBack scrollable>
@@ -103,12 +110,12 @@ export function SignUpScreen() {
       />
       <Button
         // loading={isLoading}
-        // disabled={
-        //   !formState.isValid ||
-        //   usernameValidation.notReady ||
-        //   emailValidation.notReady
-        // }
-        // onPress={handleSubmit(submitForm)}
+        disabled={
+          !formState.isValid
+          // usernameValidation.notReady ||
+          // emailValidation.notReady
+        }
+        onPress={handleSubmit(submitForm)}
         title="Criar uma conta"
       />
     </Screen>

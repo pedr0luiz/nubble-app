@@ -7,12 +7,9 @@ import {
   ForgotPasswordSchema,
   forgotPasswordSchema,
 } from './forgotPasswordSchema';
-import {RootStackParamList} from '../../../routes/Routes';
-import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
-import {Screen} from '../../../components/Screen/Screen';
-import {Text} from '../../../components/Text/Text';
-import {FormTextInput} from '../../../components/Form/FormTextInput';
-import {Button} from '../../../components/Button/Button';
+import {useResetNavigationSuccess} from '@hooks';
+import {Button, FormTextInput, Screen, Text} from '@components';
+import {RootStackParamList} from '@routes';
 
 const resetParam: RootStackParamList['SuccessScreen'] = {
   title: `Enviamos as instruções ${'\n'}para seu e-mail`,
@@ -35,6 +32,7 @@ export function ForgotPasswordScreen() {
   });
 
   function submitForm(values: ForgotPasswordSchema) {
+    console.log(values);
     reset(resetParam);
     // requestNewPassword(values.email);
   }
