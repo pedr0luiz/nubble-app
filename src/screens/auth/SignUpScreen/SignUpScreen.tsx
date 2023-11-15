@@ -1,14 +1,25 @@
 import React from 'react';
 import {Screen} from '../../../components/Screen/Screen';
 import {Text} from '../../../components/Text/Text';
-import {TextInput} from '../../../components/TextInput/TextInput';
 import {Button} from '../../../components/Button/Button';
-import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 // import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../routes/Routes';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
+import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {useForm} from 'react-hook-form';
+import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
+import {SignUpSchema, signUpSchema} from './signUpSchema';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 // type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
+
+const defaultValues: SignUpSchema = {
+  username: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+};
 
 const resetParam: RootStackParamList['SuccessScreen'] = {
   title: 'Sua conta foi criada com sucesso!',
@@ -20,11 +31,18 @@ const resetParam: RootStackParamList['SuccessScreen'] = {
 };
 
 export function SignUpScreen() {
-  const {reset} = useResetNavigationSuccess();
+  const {control, formState, handleSubmit, watch, getFieldState} =
+    useForm<SignUpSchema>({
+      resolver: zodResolver(signUpSchema),
+      defaultValues,
+      mode: 'onChange',
+    });
 
-  const navigateToSuccess = () => {
-    reset(resetParam);
-  };
+  // const {reset} = useResetNavigationSuccess();
+
+  // const navigateToSuccess = () => {
+  //   reset(resetParam);
+  // };
 
   return (
     <Screen canGoBack scrollable>
@@ -32,7 +50,9 @@ export function SignUpScreen() {
         Criar uma conta
       </Text>
 
-      <TextInput
+      <FormTextInput
+        control={control}
+        name="username"
         label="Seu username"
         placeholder="@"
         // errorMessage={usernameValidation.errorMessage}
@@ -44,19 +64,25 @@ export function SignUpScreen() {
         // }
       />
 
-      <TextInput
+      <FormTextInput
+        control={control}
+        name="firstName"
         autoCapitalize="words"
         label="Nome"
         placeholder="Digite seu nome"
         boxProps={{mb: 's20'}}
       />
-      <TextInput
+      <FormTextInput
+        control={control}
+        name="lastName"
         autoCapitalize="words"
         label="Sobrenome"
         placeholder="Digite seu sobrenome"
         boxProps={{mb: 's20'}}
       />
-      <TextInput
+      <FormTextInput
+        control={control}
+        name="email"
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's20'}}
@@ -68,12 +94,13 @@ export function SignUpScreen() {
         // }
       />
 
-      <PasswordInput
+      <FormPasswordInput
+        control={control}
+        name="password"
         label="Senha"
         placeholder="Digite sua senha"
         boxProps={{mb: 's48'}}
       />
-
       <Button
         // loading={isLoading}
         // disabled={
@@ -81,7 +108,7 @@ export function SignUpScreen() {
         //   usernameValidation.notReady ||
         //   emailValidation.notReady
         // }
-        onPress={navigateToSuccess}
+        // onPress={handleSubmit(submitForm)}
         title="Criar uma conta"
       />
     </Screen>

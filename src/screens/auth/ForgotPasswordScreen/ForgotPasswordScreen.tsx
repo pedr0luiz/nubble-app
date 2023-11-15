@@ -1,16 +1,18 @@
 import React from 'react';
-import {Screen} from '../../../components/Screen/Screen';
-import {Text} from '../../../components/Text/Text';
-import {TextInput} from '../../../components/TextInput/TextInput';
-import {Button} from '../../../components/Button/Button';
-// import {NativeStackScreenProps} from '@react-navigation/native-stack';
+
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useForm} from 'react-hook-form';
+
+import {
+  ForgotPasswordSchema,
+  forgotPasswordSchema,
+} from './forgotPasswordSchema';
 import {RootStackParamList} from '../../../routes/Routes';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
-
-// type ScreenProps = NativeStackScreenProps<
-//   RootStackParamList,
-//   'ForgotPasswordScreen'
-// >;
+import {Screen} from '../../../components/Screen/Screen';
+import {Text} from '../../../components/Text/Text';
+import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {Button} from '../../../components/Button/Button';
 
 const resetParam: RootStackParamList['SuccessScreen'] = {
   title: `Enviamos as instruções ${'\n'}para seu e-mail`,
@@ -24,9 +26,18 @@ const resetParam: RootStackParamList['SuccessScreen'] = {
 export function ForgotPasswordScreen() {
   const {reset} = useResetNavigationSuccess();
 
-  const handleSubmit = () => {
+  const {control, formState, handleSubmit} = useForm<ForgotPasswordSchema>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: '',
+    },
+    mode: 'onChange',
+  });
+
+  function submitForm(values: ForgotPasswordSchema) {
     reset(resetParam);
-  };
+    // requestNewPassword(values.email);
+  }
 
   return (
     <Screen canGoBack>
@@ -37,7 +48,9 @@ export function ForgotPasswordScreen() {
         Digite seu e-mail e enviaremos as instruções para redefinição de senha
       </Text>
 
-      <TextInput
+      <FormTextInput
+        control={control}
+        name="email"
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's40'}}
@@ -45,8 +58,8 @@ export function ForgotPasswordScreen() {
 
       <Button
         // loading={isLoading}
-        // disabled={!formState.isValid}
-        onPress={handleSubmit}
+        disabled={!formState.isValid}
+        onPress={handleSubmit(submitForm)}
         title="Recuperar senha"
       />
     </Screen>
