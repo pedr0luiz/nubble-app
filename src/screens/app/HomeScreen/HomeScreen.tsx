@@ -5,6 +5,9 @@ import {Post, postService} from '@domain';
 
 import {Box, PostItem, Screen} from '@components';
 
+import {HomeHeader} from './components/HomeHeader';
+// import { HomeEmpty } from './components/HomeEmpty';
+
 export function HomeScreen() {
   const [postList, setPostList] = useState<Post[]>([]);
 
@@ -24,10 +27,17 @@ export function HomeScreen() {
 
   return (
     <Screen style={$screen} hideHeader>
+      <HomeHeader />
       <FlatList
         data={postList}
         renderItem={renderItem}
         ItemSeparatorComponent={ItemSeparator}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item.id.toString()}
+        // ListHeaderComponent={<HomeHeader />}
+        // ListEmptyComponent={
+        //   <HomeEmpty refetch={refresh} error={isError} loading={isLoading} />
+        // }
       />
     </Screen>
   );
