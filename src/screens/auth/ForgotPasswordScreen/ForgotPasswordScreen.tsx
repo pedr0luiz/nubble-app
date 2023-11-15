@@ -3,13 +3,14 @@ import React from 'react';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
+import {Button, FormTextInput, Screen, Text} from '@components';
+import {useResetNavigationSuccess} from '@hooks';
+import {RootStackParamList} from '@routes';
+
 import {
   ForgotPasswordSchema,
   forgotPasswordSchema,
 } from './forgotPasswordSchema';
-import {useResetNavigationSuccess} from '@hooks';
-import {Button, FormTextInput, Screen, Text} from '@components';
-import {RootStackParamList} from '@routes';
 
 const resetParam: RootStackParamList['SuccessScreen'] = {
   title: `Enviamos as instruções ${'\n'}para seu e-mail`,

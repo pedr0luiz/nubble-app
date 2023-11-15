@@ -1,9 +1,11 @@
 import React from 'react';
-import {ScreenProps} from '../Screen';
+
+import {useNavigation} from '@react-navigation/native';
+
 import {Box, TouchableOpacityBox} from '../../Box/Box';
 import {Icon} from '../../Icon/Icon';
-import {useNavigation} from '@react-navigation/native';
 import {Text} from '../../Text/Text';
+import {ScreenProps} from '../Screen';
 
 const ICON_SIZE = 20;
 type Props = Pick<ScreenProps, 'title' | 'canGoBack'>;

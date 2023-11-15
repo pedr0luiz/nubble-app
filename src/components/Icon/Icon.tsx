@@ -1,4 +1,9 @@
 import React from 'react';
+import {Pressable} from 'react-native';
+
+import {useAppTheme} from '@hooks';
+import {ThemeColors} from '@theme';
+
 import {ArrowLeftIcon} from './ArrowLeftIcon';
 import {ArrowRightIcon} from './ArrowRightIcon';
 import {BellIcon} from './BellIcon';
@@ -9,8 +14,10 @@ import {CameraIcon} from './CameraIcon';
 import {ChatIcon} from './ChatIcon';
 import {ChatOnIcon} from './ChatOnIcon';
 import {CheckIcon} from './CheckIcon';
+import {CheckRoundIcon} from './CheckRoundIcon';
 import {ChevronRightIcon} from './ChevronRightIcon';
 import {CommentIcon} from './CommentIcon';
+import {ErrorRoundIcon} from './ErrorRoundIcon';
 import {EyeOffIcon} from './EyeOffIcon';
 import {EyeOnIcon} from './EyeOnIcon';
 import {FlashOffIcon} from './FlashOffIcon';
@@ -20,18 +27,13 @@ import {HeartIcon} from './HeartIcon';
 import {HomeFillIcon} from './HomeFillIcon';
 import {HomeIcon} from './HomeIcon';
 import {MessageIcon} from './MessageIcon';
+import {MessageRoundIcon} from './MessageRoundIcon';
 import {NewPostIcon} from './NewPostIcon';
 import {ProfileFillIcon} from './ProfileFillIcon';
 import {ProfileIcon} from './ProfileIcon';
 import {SearchIcon} from './SearchIcon';
 import {SettingsIcon} from './SettingsIcon';
 import {TrashIcon} from './TrashIcon';
-import {Pressable} from 'react-native';
-import {CheckRoundIcon} from './CheckRoundIcon';
-import {ErrorRoundIcon} from './ErrorRoundIcon';
-import {MessageRoundIcon} from './MessageRoundIcon';
-import {useAppTheme} from '@hooks';
-import {ThemeColors} from '@theme';
 
 export interface IconBase {
   size?: number;
