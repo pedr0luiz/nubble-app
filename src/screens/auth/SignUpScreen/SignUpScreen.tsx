@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
@@ -12,11 +11,9 @@ import {
   Text,
 } from '@components';
 import {useResetNavigationSuccess} from '@hooks';
-import {RootStackParamList} from '@routes';
+import {AuthScreenProps, AuthStackParamList} from '@routes';
 
 import {SignUpSchema, signUpSchema} from './signUpSchema';
-
-// type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
 const defaultValues: SignUpSchema = {
   username: '',
@@ -26,7 +23,7 @@ const defaultValues: SignUpSchema = {
   password: '',
 };
 
-const resetParam: RootStackParamList['SuccessScreen'] = {
+const resetParam: AuthStackParamList['SuccessScreen'] = {
   title: 'Sua conta foi criada com sucesso!',
   description: 'Agora é só fazer login na nossa plataforma',
   icon: {
@@ -35,7 +32,7 @@ const resetParam: RootStackParamList['SuccessScreen'] = {
   },
 };
 
-export function SignUpScreen() {
+export function SignUpScreen({}: AuthScreenProps<'SignUpScreen'>) {
   const {control, formState, handleSubmit} = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues,

@@ -5,14 +5,14 @@ import {useForm} from 'react-hook-form';
 
 import {Button, FormTextInput, Screen, Text} from '@components';
 import {useResetNavigationSuccess} from '@hooks';
-import {RootStackParamList} from '@routes';
+import {AuthStackParamList} from '@routes';
 
 import {
   ForgotPasswordSchema,
   forgotPasswordSchema,
 } from './forgotPasswordSchema';
 
-const resetParam: RootStackParamList['SuccessScreen'] = {
+const resetParam: AuthStackParamList['SuccessScreen'] = {
   title: `Enviamos as instruções ${'\n'}para seu e-mail`,
   description: 'Clique no link enviado no seu e-mail para recuperar sua senha',
   icon: {
