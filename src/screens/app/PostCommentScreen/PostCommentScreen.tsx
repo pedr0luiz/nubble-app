@@ -22,6 +22,7 @@ export function PostCommentScreen({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    refresh,
   } = usePostCommentList(postId);
 
   function renderItem({item}: ListRenderItemInfo<PostComment>) {
@@ -54,7 +55,7 @@ export function PostCommentScreen({
           }
           ItemSeparatorComponent={itemSeparator}
         />
-        <PostCommentTextMessage postId={postId} />
+        <PostCommentTextMessage postId={postId} onAddComment={refresh} />
       </Box>
     </Screen>
   );

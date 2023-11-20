@@ -1,44 +1,34 @@
-// import {PostComment} from '@domain';
-// import {MutationOptions, QueryKeys} from '@infra';
-// import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useState} from 'react';
 
-// import {postCommentService} from '../postCommentService';
+import {postCommentService} from '../postCommentService';
+import {PostComment} from '../postCommentTypes';
 
-// export function usePostCommentCreate(
-//   postId: number,
-//   options?: MutationOptions<PostComment>,
-// ) {
-//   const queryClient = useQueryClient();
+interface Options {
+  onSuccess?: (data: PostComment) => void;
+}
 
-//   const {mutate, isLoading, isError} = useMutation<
-//     PostComment,
-//     unknown,
-//     {message: string}
-//   >({
-//     mutationFn: variables =>
-//       postCommentService.create(postId, variables.message),
-//     onSuccess: data => {
-//       queryClient.invalidateQueries({
-//         queryKey: [QueryKeys.PostCommentList, postId],
-//       });
-//       if (options?.onSuccess) {
-//         options.onSuccess(data);
-//       }
-//     },
-//     onError: () => {
-//       if (options?.onError) {
-//         options.onError(options?.errorMessage || 'ocorreu um erro');
-//       }
-//     },
-//   });
+export function usePostCommentCreate(postId: number, options?: Options) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<boolean | null>(null);
 
-//   async function createComment(message: string) {
-//     mutate({message});
-//   }
+  async function createComment(message: string) {
+    try {
+      setLoading(true);
+      setError(null);
+      const postComment = await postCommentService.create(postId, message);
+      if (options?.onSuccess) {
+        options.onSuccess(postComment);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-//   return {
-//     createComment,
-//     isLoading,
-//     isError,
-//   };
-// }
+  return {
+    createComment,
+    loading,
+    error,
+  };
+}
