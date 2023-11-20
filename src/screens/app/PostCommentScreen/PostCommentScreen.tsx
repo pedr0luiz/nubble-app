@@ -28,7 +28,6 @@ export function PostCommentScreen({
   function renderItem({item}: ListRenderItemInfo<PostComment>) {
     return (
       <PostCommentItem
-        postId={postId}
         postComment={item}
         userId={1}
         postAuthorId={postAuthorId}

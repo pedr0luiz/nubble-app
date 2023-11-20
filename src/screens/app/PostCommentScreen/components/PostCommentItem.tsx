@@ -7,7 +7,6 @@ import {usePostCommentRemove} from '@domain';
 import {Box, ProfileAvatar, Text} from '@components';
 
 interface Props {
-  postId: number;
   postComment: PostComment;
   userId: number | null;
   postAuthorId: number;
@@ -15,13 +14,12 @@ interface Props {
 }
 
 export function PostCommentItem({
-  postId,
   postComment,
   userId,
   postAuthorId,
   onRemoveComment,
 }: Props) {
-  const {removeComment} = usePostCommentRemove(postId, {
+  const {removeComment} = usePostCommentRemove(postComment.id, {
     onSuccess: onRemoveComment,
   });
 

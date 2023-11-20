@@ -12,7 +12,6 @@ export function useIsPostCommentAllowedToDelete(
   userId: number | null,
   postAuthorId: number,
 ) {
-  console.log(postComment?.author.id);
   if (!postComment) {
     return false;
   }
