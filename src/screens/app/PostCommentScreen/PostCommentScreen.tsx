@@ -30,8 +30,9 @@ export function PostCommentScreen({
       <PostCommentItem
         postId={postId}
         postComment={item}
-        userId={123}
+        userId={1}
         postAuthorId={postAuthorId}
+        onRemoveComment={refresh}
       />
     );
   }

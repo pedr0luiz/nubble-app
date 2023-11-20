@@ -28,7 +28,16 @@ async function create(
   return response.data;
 }
 
+async function remove(postCommentId: number): Promise<{message: string}> {
+  const response = await api.delete<{message: string}>(
+    `${POST_COMMENT_PATH}/${postCommentId}`,
+  );
+
+  return response.data;
+}
+
 export const postCommentApi = {
   getList,
   create,
+  remove,
 };

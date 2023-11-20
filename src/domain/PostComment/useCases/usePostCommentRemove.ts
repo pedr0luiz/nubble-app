@@ -1,32 +1,33 @@
-// import {MutationOptions, QueryKeys} from '@infra';
-// import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useState} from 'react';
 
-// import {postCommentService} from '../postCommentService';
+import {postCommentService} from '../postCommentService';
 
-// export function usePostCommentRemove(
-//   postId: number,
-//   options?: MutationOptions<string>,
-// ) {
-//   const queryClient = useQueryClient();
+interface Options {
+  onSuccess?: () => void;
+}
 
-//   const mutation = useMutation<string, unknown, {postCommentId: number}>({
-//     mutationFn: ({postCommentId}) => postCommentService.remove(postCommentId),
-//     onSuccess: message => {
-//       queryClient.invalidateQueries({
-//         queryKey: [QueryKeys.PostCommentList, postId],
-//       });
-//       if (options?.onSuccess) {
-//         options.onSuccess(message);
-//       }
-//     },
-//     onError: () => {
-//       if (options?.onError) {
-//         options?.onError(options.errorMessage || 'mensagem genérica');
-//       }
-//     },
-//   });
+export function usePostCommentRemove(postCommentId: number, options?: Options) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<boolean | null>(null);
 
-//   return {
-//     mutate: mutation.mutate,
-//   };
-// }
+  async function removeComment() {
+    try {
+      setLoading(true);
+      setError(null);
+      await postCommentService.remove(postCommentId);
+      if (options?.onSuccess) {
+        options.onSuccess();
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return {
+    removeComment,
+    loading,
+    error,
+  };
+}
