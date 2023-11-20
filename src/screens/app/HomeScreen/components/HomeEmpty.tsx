@@ -22,7 +22,7 @@ export function HomeEmpty({loading, error, refetch}: Props) {
     component = (
       <>
         <Text bold preset="paragraphMedium" mb="s16">
-          Não foi possível carregar o feed 😢
+          Não foi possível carregar o feed
         </Text>
         <Button title="recarregar" preset="outline" onPress={refetch} />
       </>

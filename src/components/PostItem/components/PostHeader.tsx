@@ -10,7 +10,6 @@ import {Text} from '../../Text/Text';
 
 type Props = Pick<Post, 'author'>;
 export function PostHeader({author}: Props) {
-  console.log(author);
   // const navigation = useNavigation();
 
   function navigateToProfile() {

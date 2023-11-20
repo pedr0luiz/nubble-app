@@ -1,21 +1,33 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo, StyleProp, ViewStyle} from 'react-native';
+import React, {useCallback, useRef} from 'react';
+import {
+  FlatList,
+  ListRenderItemInfo,
+  RefreshControl,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
-import {Post, postService} from '@domain';
+import {Post, usePostList} from '@domain';
+import {useScrollToTop} from '@react-navigation/native';
 
-import {Box, PostItem, Screen} from '@components';
+import {ActivityIndicator, Box, PostItem, Screen} from '@components';
 
+import {HomeEmpty} from './components/HomeEmpty';
 import {HomeHeader} from './components/HomeHeader';
-// import { HomeEmpty } from './components/HomeEmpty';
 
 export function HomeScreen() {
-  const [postList, setPostList] = useState<Post[]>([]);
+  const {
+    isError,
+    isLoading,
+    postList,
+    isFetchingNextPage,
+    refresh,
+    fetchNextPage,
+  } = usePostList();
 
-  useEffect(() => {
-    postService.getList().then(res => {
-      setPostList(res.data);
-    });
-  }, []);
+  const flatListRef = useRef<FlatList<Post>>(null);
+
+  useScrollToTop(flatListRef);
 
   function renderItem({item}: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />;
@@ -29,15 +41,30 @@ export function HomeScreen() {
     <Screen style={$screen} hideHeader>
       <HomeHeader />
       <FlatList
+        ref={flatListRef}
         data={postList}
         renderItem={renderItem}
         ItemSeparatorComponent={ItemSeparator}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id.toString()}
         // ListHeaderComponent={<HomeHeader />}
-        // ListEmptyComponent={
-        //   <HomeEmpty refetch={refresh} error={isError} loading={isLoading} />
-        // }
+        ListEmptyComponent={
+          <HomeEmpty error={isError} loading={isLoading} refetch={refresh} />
+        }
+        contentContainerStyle={{flex: postList.length === 0 ? 1 : 0}}
+        ListFooterComponent={
+          <Box mb="s24" mt={isFetchingNextPage ? 's20' : undefined}>
+            {isFetchingNextPage && (
+              <ActivityIndicator color="backgroundContrast" />
+            )}
+          </Box>
+        }
+        onEndReached={fetchNextPage}
+        onEndReachedThreshold={0.1}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={refresh} />
+        }
+        refreshing={isLoading}
       />
     </Screen>
   );

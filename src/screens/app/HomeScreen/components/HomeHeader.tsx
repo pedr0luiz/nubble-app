@@ -9,7 +9,7 @@ export function HomeHeader() {
   const {top} = useAppSafeArea();
 
   return (
-    <Box {...$wrapper} style={{paddingTop: top}}>
+    <Box {...$wrapper} style={{paddingTop: top + 8}}>
       <SimpleLogo width={70} />
       <Box flexDirection="row">
         <Box mr="s24">
@@ -28,6 +28,6 @@ const $wrapper: BoxProps = {
   flexDirection: 'row',
 
   justifyContent: 'space-between',
-  paddingBottom: 's24',
+  paddingBottom: 's20',
   paddingHorizontal: 's24',
 };
