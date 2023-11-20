@@ -13,7 +13,7 @@ export function HomeScreen() {
 
   useEffect(() => {
     postService.getList().then(res => {
-      setPostList(res);
+      setPostList(res.data);
     });
   }, []);
 
