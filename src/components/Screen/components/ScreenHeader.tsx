@@ -15,7 +15,7 @@ export function ScreenHeader({canGoBack, title}: Props) {
   return (
     <Box
       flexDirection="row"
-      mb="s24"
+      paddingVertical="s12"
       alignItems="center"
       justifyContent="space-between">
       {canGoBack && (
@@ -31,8 +31,8 @@ export function ScreenHeader({canGoBack, title}: Props) {
           )}
         </TouchableOpacityBox>
       )}
-      {/* {title && <Text preset="headingSmall">{title}</Text>}
-      {title && <Box backgroundColor="carrotSecondary" width={ICON_SIZE} />} */}
+      {title && <Text preset="headingSmall">{title}</Text>}
+      {title && <Box backgroundColor="carrotSecondary" width={ICON_SIZE} />}
     </Box>
   );
 }

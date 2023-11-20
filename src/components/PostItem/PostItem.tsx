@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 import {Post} from '@domain';
 
@@ -12,7 +12,7 @@ import {PostImage} from './components/PostImage';
 interface Props {
   post: Post;
 }
-export function PostItem({post}: Props) {
+export const PostItem = memo(({post}: Props) => {
   return (
     <Box paddingHorizontal="s24">
       <PostHeader author={post.author} />
@@ -30,4 +30,4 @@ export function PostItem({post}: Props) {
       />
     </Box>
   );
-}
+});

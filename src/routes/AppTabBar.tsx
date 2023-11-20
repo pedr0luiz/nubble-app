@@ -92,7 +92,7 @@ const $itemWrapper: TouchableOpacityBoxProps = {
 };
 
 const $boxWrapper: BoxProps = {
-  paddingTop: 's12',
+  paddingTop: 's16',
   backgroundColor: 'background',
   flexDirection: 'row',
 };

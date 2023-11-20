@@ -19,7 +19,7 @@ export function HomeScreen() {
   const {
     isError,
     isLoading,
-    postList,
+    data: postList,
     isFetchingNextPage,
     refresh,
     fetchNextPage,
@@ -60,7 +60,7 @@ export function HomeScreen() {
           </Box>
         }
         onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.5}
         refreshControl={
           <RefreshControl refreshing={isLoading} onRefresh={refresh} />
         }
