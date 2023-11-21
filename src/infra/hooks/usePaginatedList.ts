@@ -15,7 +15,7 @@ export function usePaginatedList<TData>(
   async function fetchInitialData() {
     setIsLoading(true);
     try {
-      const {data, meta} = await getList(page.current);
+      const {data, meta} = await getList(1);
       setListData(data);
       hasNextPage.current = meta.hasNextPage;
     } catch (err) {
