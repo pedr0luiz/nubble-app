@@ -17,13 +17,8 @@ export function PostCommentScreen({
 }: AppScreenProps<'PostCommentScreen'>) {
   const postId = route.params.postId;
   const postAuthorId = route.params.postAuthorId;
-  const {
-    data: list,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    refresh,
-  } = usePostCommentList(postId);
+  const {list, fetchNextPage, hasNextPage, isFetchingNextPage, refresh} =
+    usePostCommentList(postId);
 
   function renderItem({item}: ListRenderItemInfo<PostComment>) {
     return (

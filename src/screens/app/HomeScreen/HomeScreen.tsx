@@ -17,9 +17,9 @@ import {HomeHeader} from './components/HomeHeader';
 
 export function HomeScreen() {
   const {
+    list: postList,
     isError,
     isLoading,
-    data: postList,
     isFetchingNextPage,
     refresh,
     fetchNextPage,

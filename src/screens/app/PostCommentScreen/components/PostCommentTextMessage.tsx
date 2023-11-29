@@ -7,7 +7,7 @@ import {TextMessage} from '@components';
 
 interface Props {
   postId: number;
-  onAddComment: () => Promise<void>;
+  onAddComment: () => void;
 }
 export function PostCommentTextMessage({postId, onAddComment}: Props) {
   const [message, setMessage] = useState('');
