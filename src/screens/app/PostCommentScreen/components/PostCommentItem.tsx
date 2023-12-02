@@ -8,15 +8,21 @@ import {useToastService} from '@services';
 import {Box, ProfileAvatar, Text} from '@components';
 
 interface Props {
+  postId: number;
   postComment: PostComment;
   userId: number | null;
   postAuthorId: number;
 }
 
-export function PostCommentItem({postComment, userId, postAuthorId}: Props) {
+export function PostCommentItem({
+  postComment,
+  userId,
+  postAuthorId,
+  postId,
+}: Props) {
   const {showToast} = useToastService();
 
-  const {mutate: removeComment} = usePostCommentRemove(postComment.id, {
+  const {mutate: removeComment} = usePostCommentRemove(postId, {
     onSuccess: () => {
       showToast({message: 'Cometário deletado'});
     },
@@ -32,7 +38,7 @@ export function PostCommentItem({postComment, userId, postAuthorId}: Props) {
     Alert.alert('Deseja excluir o comentário?', 'pressione confirmar', [
       {
         text: 'Confirmar',
-        onPress: removeComment,
+        onPress: () => removeComment({postCommentId: postComment.id}),
       },
       {
         text: 'Cancelar',

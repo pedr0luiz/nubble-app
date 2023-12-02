@@ -9,8 +9,8 @@ export function usePostCommentRemove(
 ) {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation<string, unknown, unknown>({
-    mutationFn: () => postCommentService.remove(postId),
+  const mutation = useMutation<string, unknown, {postCommentId: number}>({
+    mutationFn: ({postCommentId}) => postCommentService.remove(postCommentId),
     onSuccess: message => {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.PostCommentList, postId],
