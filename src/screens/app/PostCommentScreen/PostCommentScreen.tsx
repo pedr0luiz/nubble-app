@@ -17,7 +17,7 @@ export function PostCommentScreen({
 }: AppScreenProps<'PostCommentScreen'>) {
   const postId = route.params.postId;
   const postAuthorId = route.params.postAuthorId;
-  const {list, fetchNextPage, hasNextPage, isFetchingNextPage, refresh} =
+  const {list, fetchNextPage, hasNextPage, isFetchingNextPage} =
     usePostCommentList(postId);
 
   function renderItem({item}: ListRenderItemInfo<PostComment>) {
@@ -26,7 +26,6 @@ export function PostCommentScreen({
         postComment={item}
         userId={1}
         postAuthorId={postAuthorId}
-        onRemoveComment={refresh}
       />
     );
   }
@@ -50,7 +49,7 @@ export function PostCommentScreen({
           }
           ItemSeparatorComponent={itemSeparator}
         />
-        <PostCommentTextMessage postId={postId} onAddComment={refresh} />
+        <PostCommentTextMessage postId={postId} />
       </Box>
     </Screen>
   );
