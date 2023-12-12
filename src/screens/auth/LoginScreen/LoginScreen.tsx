@@ -1,20 +1,26 @@
 import React from 'react';
 
+import {useAuthSignIn} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useToastService} from '@services';
 import {useForm} from 'react-hook-form';
 
 import {
-  Button,
-  FormPasswordInput,
-  FormTextInput,
-  Screen,
   Text,
+  Screen,
+  Button,
+  FormTextInput,
+  FormPasswordInput,
 } from '@components';
 import {AuthScreenProps} from '@routes';
 
 import {LoginSchema, loginSchema} from './loginSchema';
 
 export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
+  const {showToast} = useToastService();
+  const {isLoading, signIn} = useAuthSignIn({
+    onError: message => showToast({message, type: 'error'}),
+  });
   const {control, formState, handleSubmit} = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -25,7 +31,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
   });
 
   function submitForm({email, password}: LoginSchema) {
-    console.log({email, password});
+    signIn({email, password});
   }
 
   function navigateToSignUpScreen() {
@@ -36,7 +42,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
     navigation.navigate('ForgotPasswordScreen');
   }
   return (
-    <Screen>
+    <Screen scrollable>
       <Text marginBottom="s8" preset="headingLarge">
         Olá
       </Text>
@@ -69,7 +75,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
       </Text>
 
       <Button
-        // loading={isLoading}
+        loading={isLoading}
         disabled={!formState.isValid}
         onPress={handleSubmit(submitForm)}
         marginTop="s48"
