@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Alert, Pressable} from 'react-native';
 
 import {PostComment, useIsPostCommentAllowedToDelete} from '@domain';
@@ -14,12 +14,7 @@ interface Props {
   postAuthorId: number;
 }
 
-export function PostCommentItem({
-  postComment,
-  userId,
-  postAuthorId,
-  postId,
-}: Props) {
+function PostCommentItem({postComment, userId, postAuthorId, postId}: Props) {
   const {showToast} = useToastService();
 
   const {mutate: removeComment} = usePostCommentRemove(postId, {
@@ -66,3 +61,5 @@ export function PostCommentItem({
     </Pressable>
   );
 }
+
+export const MemoizedPostCommentItem = memo(PostCommentItem);

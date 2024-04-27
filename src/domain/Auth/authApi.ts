@@ -16,7 +16,7 @@ async function signIn(
   email: string,
   password: string,
 ): Promise<AuthCredentialsAPI> {
-  const response = await api.post<AuthCredentialsAPI>('auth/login', {
+  const response = await api.post<AuthCredentialsAPI>('login', {
     email,
     password,
   });

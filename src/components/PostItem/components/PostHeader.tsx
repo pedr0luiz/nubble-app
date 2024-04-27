@@ -2,7 +2,7 @@ import React from 'react';
 import {Pressable} from 'react-native';
 
 import {Post} from '@domain';
-// import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 import {Box} from '../../Box/Box';
 import {ProfileAvatar} from '../../ProfileAvatar/ProfileAvatar';
@@ -10,10 +10,10 @@ import {Text} from '../../Text/Text';
 
 type Props = Pick<Post, 'author'>;
 export function PostHeader({author}: Props) {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   function navigateToProfile() {
-    // navigation.navigate('ProfileScreen', {userId: author.id});
+    navigation.navigate('ProfileScreen', {userId: author.id});
   }
 
   return (

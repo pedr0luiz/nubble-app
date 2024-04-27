@@ -8,7 +8,7 @@ import {AppScreenProps} from '@routes';
 
 import {
   PostCommentBottom,
-  PostCommentItem,
+  MemoizedPostCommentItem,
   PostCommentTextMessage,
 } from './components';
 
@@ -20,16 +20,19 @@ export function PostCommentScreen({
   const {list, fetchNextPage, hasNextPage, isFetchingNextPage} =
     usePostCommentList(postId);
 
-  function renderItem({item}: ListRenderItemInfo<PostComment>) {
-    return (
-      <PostCommentItem
-        postId={postId}
-        postComment={item}
-        userId={1}
-        postAuthorId={postAuthorId}
-      />
-    );
-  }
+  const renderItem = useCallback(
+    ({item}: ListRenderItemInfo<PostComment>) => {
+      return (
+        <MemoizedPostCommentItem
+          postId={postId}
+          postComment={item}
+          userId={1}
+          postAuthorId={postAuthorId}
+        />
+      );
+    },
+    [postAuthorId, postId],
+  );
 
   const itemSeparator = useCallback(() => <Box mb="s16" />, []);
 
@@ -41,6 +44,7 @@ export function PostCommentScreen({
           data={list}
           renderItem={renderItem}
           contentContainerStyle={{paddingBottom: 16}}
+          keyExtractor={item => item.id.toString()}
           ListFooterComponent={
             <PostCommentBottom
               isLoading={isFetchingNextPage}
