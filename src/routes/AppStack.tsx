@@ -3,7 +3,12 @@ import React from 'react';
 import {NavigatorScreenParams} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {SettingsScreen, PostCommentScreen, ProfileScreen} from '@screens';
+import {
+  SettingsScreen,
+  PostCommentScreen,
+  ProfileScreen,
+  DarkModeScreen,
+} from '@screens';
 
 import {AppTabBottomTabParamList, AppTabNavigator} from './AppTabNavigator';
 
@@ -17,6 +22,7 @@ export type AppStackParamList = {
   ProfileScreen: {
     userId: number;
   };
+  DarkModeScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -33,6 +39,7 @@ export function AppStack() {
       <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
       <Stack.Screen name="PostCommentScreen" component={PostCommentScreen} />
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Stack.Screen name="DarkModeScreen" component={DarkModeScreen} />
     </Stack.Navigator>
   );
 }

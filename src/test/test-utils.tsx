@@ -44,7 +44,7 @@ export const wrapAllProviders = () => {
   return ({children}: {children: React.ReactNode}) => (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>{children} </NavigationContainer>
+        <NavigationContainer>{children}</NavigationContainer>
       </ThemeProvider>
     </QueryClientProvider>
   );
@@ -64,7 +64,7 @@ export const wrapScreenProviders = () => {
     <AuthCredentialsProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <NavigationContainer>{children} </NavigationContainer>
+          <NavigationContainer>{children}</NavigationContainer>
           <Toast />
         </ThemeProvider>
       </QueryClientProvider>

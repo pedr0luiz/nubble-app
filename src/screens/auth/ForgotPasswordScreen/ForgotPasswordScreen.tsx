@@ -20,6 +20,7 @@ const resetParam: AuthStackParamList['SuccessScreen'] = {
   icon: {
     name: 'messageRound',
     color: 'primary',
+    fillColor: 'primaryContrast',
   },
 };
 

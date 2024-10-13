@@ -42,10 +42,10 @@ export function AuthCredentialsProvider({
   async function startAuthCredentials() {
     try {
       const ac = await authCredentialsStorage.get();
-      // if (ac) {
-      //   authService.updateToken(ac.token);
-      //   setAuthCredentials(ac);
-      // }
+      if (ac) {
+        authService.updateToken(ac.token);
+        setAuthCredentials(ac);
+      }
     } catch (error) {
       // TODO: handle error
     } finally {

@@ -49,7 +49,7 @@ export function TextInput({
             autoCapitalize="none"
             ref={inputRef}
             placeholderTextColor={colors.gray2}
-            style={$textInputStyle}
+            style={[$textInputStyle, {color: colors.paragraph}]}
             {...rnTextInputProps}
           />
           {RightComponent && (
@@ -72,7 +72,6 @@ export const $textInputStyle: TextStyle = {
   padding: 0,
   flexGrow: 1,
   flexShrink: 1,
-
   fontFamily: $fontFamily.regular,
   ...$fontSizes.paragraphMedium,
 };
