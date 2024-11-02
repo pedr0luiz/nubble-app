@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
 import {PostComment, usePostCommentList} from '@domain';
+import {useAuthCredentials} from '@services';
 
 import {Box, Screen} from '@components';
 import {AppScreenProps} from '@routes';
@@ -19,6 +20,7 @@ export function PostCommentScreen({
   const postAuthorId = route.params.postAuthorId;
   const {list, fetchNextPage, hasNextPage, isFetchingNextPage} =
     usePostCommentList(postId);
+  const {userId} = useAuthCredentials();
 
   const renderItem = useCallback(
     ({item}: ListRenderItemInfo<PostComment>) => {
@@ -26,12 +28,12 @@ export function PostCommentScreen({
         <MemoizedPostCommentItem
           postId={postId}
           postComment={item}
-          userId={1}
+          userId={userId}
           postAuthorId={postAuthorId}
         />
       );
     },
-    [postAuthorId, postId],
+    [postAuthorId, postId, userId],
   );
 
   const itemSeparator = useCallback(() => <Box mb="s16" />, []);
