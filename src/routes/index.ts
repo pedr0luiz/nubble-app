@@ -1,4 +1,5 @@
 export * from './Routes';
 export * from './navigationType';
-export type {AuthStackParamList} from './AuthStack';
-export type {AppStackParamList} from './AppStack';
+export * from './AppStack';
+export * from './AuthStack';
+export * from './AppTabNavigator';
