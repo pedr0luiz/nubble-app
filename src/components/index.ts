@@ -14,3 +14,5 @@ export * from './TextMessage/TextMessage';
 export * from './Toast/Toast';
 export * from './Separator/Separator';
 export * from './RadioButton';
+export * from './BackButton/BackButton';
+export * from './ProfileUser/ProfileUser';

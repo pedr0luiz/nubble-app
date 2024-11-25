@@ -38,7 +38,7 @@ export function HomeScreen() {
   }, []);
 
   return (
-    <Screen style={$screen} hideHeader>
+    <Screen style={$screen}>
       <HomeHeader />
       <FlatList
         ref={flatListRef}
@@ -47,7 +47,6 @@ export function HomeScreen() {
         ItemSeparatorComponent={ItemSeparator}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id.toString()}
-        // ListHeaderComponent={<HomeHeader />}
         ListEmptyComponent={
           <HomeEmpty error={isError} loading={isLoading} refetch={refresh} />
         }

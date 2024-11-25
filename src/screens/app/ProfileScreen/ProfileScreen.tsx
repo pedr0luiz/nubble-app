@@ -1,7 +1,7 @@
 import React from 'react';
 import {RefreshControl, ScrollView} from 'react-native';
 
-import {useGetUserById} from '@domain';
+import {useUserGetById} from '@domain';
 
 import {ActivityIndicator, Box, ProfileAvatar, Screen, Text} from '@components';
 import {AppScreenProps} from '@routes';
@@ -10,7 +10,7 @@ export function ProfileScreen({route}: AppScreenProps<'ProfileScreen'>) {
   const userId = route.params.userId;
 
   const {isError, isLoading, user, refetch, isFetching} =
-    useGetUserById(userId);
+    useUserGetById(userId);
 
   return (
     <Screen canGoBack flex={1}>

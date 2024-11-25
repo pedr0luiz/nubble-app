@@ -7,21 +7,26 @@ import {
 } from 'react-native';
 
 import {useAppTheme} from '@hooks';
+import {colors as themeColors} from '@theme';
 
 import {Box, BoxProps} from '../Box/Box';
 import {$fontFamily, $fontSizes, Text} from '../Text/Text';
+
 export interface TextInputProps extends RNTextInputProps {
-  label: string;
+  label?: string;
   errorMessage?: string;
   RightComponent?: React.ReactElement;
+  LeftComponent?: React.ReactElement;
   boxProps?: BoxProps;
+  containerProps?: BoxProps;
 }
-
 export function TextInput({
   label,
   errorMessage,
   RightComponent,
+  LeftComponent,
   boxProps,
+  containerProps,
   ...rnTextInputProps
 }: TextInputProps) {
   const {colors} = useAppTheme();
@@ -39,17 +44,27 @@ export function TextInput({
     inputRef.current?.focus();
   }
   return (
-    <Box {...boxProps}>
+    <Box flexGrow={1} flexShrink={1} {...boxProps}>
       <Pressable onPress={focusInput}>
-        <Text preset="paragraphMedium" marginBottom="s4">
-          {label}
-        </Text>
-        <Box {...$textInputContainer}>
+        {label && (
+          <Text preset="paragraphMedium" marginBottom="s4">
+            {label}
+          </Text>
+        )}
+        <Box
+          {...$textInputContainer}
+          {...containerProps}
+          backgroundColor="grayWhite">
+          {LeftComponent && (
+            <Box justifyContent="center" mr="s16">
+              {LeftComponent}
+            </Box>
+          )}
           <RNTextInput
             autoCapitalize="none"
             ref={inputRef}
             placeholderTextColor={colors.gray2}
-            style={[$textInputStyle, {color: colors.paragraph}]}
+            style={$textInputStyle}
             {...rnTextInputProps}
           />
           {RightComponent && (
@@ -72,6 +87,7 @@ export const $textInputStyle: TextStyle = {
   padding: 0,
   flexGrow: 1,
   flexShrink: 1,
+  color: themeColors.palette.grayBlack,
   fontFamily: $fontFamily.regular,
   ...$fontSizes.paragraphMedium,
 };
