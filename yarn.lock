@@ -6212,6 +6212,11 @@ react-native-mmkv@^2.11.0:
   resolved "https://registry.yarnpkg.com/react-native-mmkv/-/react-native-mmkv-2.11.0.tgz#51b9985f6a5c09fe9c16d8c1861cc2901856ace1"
   integrity sha512-28PdUHjZJmAw3q+8zJDAAdohnZMpDC7WgRUJxACOMkcmJeqS3u5cKS/lSq2bhf1CvaeIiHYHUWiyatUjMRCDQQ==
 
+react-native-permissions@^5.2.6:
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-5.2.6.tgz#80efd6d8ebfc98d223b47abf90db968c14cf74cd"
+  integrity sha512-C/tbf5UQZCAXiveDcRcyyluEt8JYnPZ9Zee2L/vJ0xmdpRAIUYWCUPNyfDEPkD8DfQhR9IqxeYxSOL+r68Cqtw==
+
 react-native-safe-area-context@^4.7.4:
   version "4.7.4"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.7.4.tgz#3dd8438971e70043d76f2428ede75b8a9639265e"
