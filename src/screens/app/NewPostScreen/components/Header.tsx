@@ -1,9 +1,8 @@
 import React from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 
-// import {useNavigation} from '@react-navigation/native';
-
 import {images} from '@assets';
+import {useNavigation} from '@react-navigation/native';
 
 import {Box, BoxProps, Button, Icon, Text} from '@components';
 
@@ -12,12 +11,12 @@ interface Props {
   imageWidth: number;
 }
 export function Header({imageUri, imageWidth}: Props) {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   function navigateToPublishPost() {
-    // if (imageUri) {
-    //   navigation.navigate('PublishPostScreen', {imageUri});
-    // }
+    if (imageUri) {
+      navigation.navigate('PublishPostScreen', {imageUri});
+    }
   }
 
   function navigateToCamera() {
