@@ -9,7 +9,7 @@ import {
 
 import {useMultimediaGetPhotos, usePermission} from '@services';
 
-import {Screen} from '@components';
+import {PermissionManager, Screen} from '@components';
 import {AppTabScreenProps} from '@routes';
 
 import {Header} from './components/Header';
@@ -17,8 +17,8 @@ import {Header} from './components/Header';
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 const NUM_COLUMNS = 4;
 const ITEM_WIDTH = SCREEN_WIDTH / NUM_COLUMNS;
-
-export function NewPostScreen({}: AppTabScreenProps<'NewPostScreen'>) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function NewPostScreen(props: AppTabScreenProps<'NewPostScreen'>) {
   const [selectedImage, setSelectedImage] = useState<string>();
   const permission = usePermission('photoLibrary');
   const {photoList, fetchNextPage} = useMultimediaGetPhotos(
@@ -44,20 +44,23 @@ export function NewPostScreen({}: AppTabScreenProps<'NewPostScreen'>) {
       </Pressable>
     );
   }
-
   return (
-    <Screen canGoBack noPaddingHorizontal title="Novo post">
-      <FlatList
-        ref={flatListRef}
-        numColumns={NUM_COLUMNS}
-        data={photoList}
-        renderItem={renderItem}
-        onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.1}
-        ListHeaderComponent={
-          <Header imageWidth={SCREEN_WIDTH} imageUri={selectedImage} />
-        }
-      />
-    </Screen>
+    <PermissionManager
+      permissionName="photoLibrary"
+      description="Permita o Nubble acessar as images da sua galeria">
+      <Screen canGoBack noPaddingHorizontal title="Novo post">
+        <FlatList
+          ref={flatListRef}
+          numColumns={NUM_COLUMNS}
+          data={photoList}
+          renderItem={renderItem}
+          onEndReached={fetchNextPage}
+          onEndReachedThreshold={0.1}
+          ListHeaderComponent={
+            <Header imageWidth={SCREEN_WIDTH} imageUri={selectedImage} />
+          }
+        />
+      </Screen>
+    </PermissionManager>
   );
 }
