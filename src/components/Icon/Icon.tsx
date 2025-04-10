@@ -10,6 +10,7 @@ import {BellIcon} from './BellIcon';
 import {BellOnIcon} from './BellOnIcon';
 import {BookmarkFillIcon} from './BookmarkFillIcon';
 import {BookmarkIcon} from './BookmarkIcon';
+import {CameraClick} from './CameraClick';
 import {CameraIcon} from './CameraIcon';
 import {ChatIcon} from './ChatIcon';
 import {ChatOnIcon} from './ChatOnIcon';
@@ -85,6 +86,7 @@ const iconRegistry = {
   bookmark: BookmarkIcon,
   bookmarkFill: BookmarkFillIcon,
   camera: CameraIcon,
+  cameraClick: CameraClick,
   chat: ChatIcon,
   chatOn: ChatOnIcon,
   check: CheckIcon,
